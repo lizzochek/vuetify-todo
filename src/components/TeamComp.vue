@@ -16,8 +16,8 @@
             >
             <v-card-actions text color="grey" class="justify-center">
               <v-icon small left>message</v-icon>
-              <span class="text-uppercase grey--text">message</span></v-card-actions
-            >
+              <v-btn text class="text-uppercase grey--text">message</v-btn>
+            </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>
