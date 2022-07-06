@@ -78,6 +78,7 @@ export default {
         setItem('projects', project);
         this.isLoading = false;
         this.dialog = false;
+        this.$emit('projectAdded');
       }
     },
   },
