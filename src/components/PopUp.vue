@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="600px">
+  <v-dialog max-width="600px" v-model="dialog">
     <template v-slot:activator="{ on }">
       <v-btn class="success" v-on="on"> Add new project </v-btn>
     </template>
@@ -46,20 +46,32 @@
 </template>
 
 <script>
+import { setItem } from '@/fb';
+
 export default {
   data() {
     return {
       title: '',
       content: '',
       due: '',
+      dialog: false,
       inputRules: [(v) => v.length >= 3 || 'Minimum length is three characters'],
     };
   },
 
   methods: {
-    submitForm() {
+    async submitForm() {
       if (this.$refs.form.validate()) {
-        console.log("It's valid");
+        const project = {
+          title: this.title,
+          content: this.content,
+          due: this.due,
+          person: 'Liza',
+          status: 'ongoing',
+        };
+
+        setItem('projects', project);
+        this.dialog = false;
       }
     },
   },
