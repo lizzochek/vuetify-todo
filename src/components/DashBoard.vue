@@ -2,7 +2,18 @@
   <div class="dashboard">
     <h1 class="subheading grey--text">Dashboard</h1>
     <v-container class="my-5">
-      <v-card flat class="pa-3 ma-2" v-for="project in projects" :key="project.title">
+      <v-layout row class="mb-3">
+        <v-btn small text color="grey" @click="sortByParam('title')">
+          <v-icon left small>folder</v-icon>
+          <span class="caption text-lowercase">by title</span>
+        </v-btn>
+        <v-btn small text color="grey" @click="sortByParam('person')">
+          <v-icon left small>person</v-icon>
+          <span class="caption text-lowercase">by person</span>
+        </v-btn>
+      </v-layout>
+
+      <v-card text class="pa-3 ma-2" v-for="project in projects" :key="project.title">
         <v-layout row wrap :class="`pa-3 ${project.status}`">
           <v-flex xs12 md6>
             <div class="caption grey--text">Project title</div>
@@ -55,7 +66,7 @@ export default defineComponent({
         },
         {
           title: 'Design video thumbnails',
-          person: 'Sam',
+          person: 'Chendler',
           due: '20th Dec 2023',
           status: 'complete',
           content:
@@ -71,6 +82,11 @@ export default defineComponent({
         },
       ],
     };
+  },
+  methods: {
+    sortByParam(param) {
+      this.projects.sort((a, b) => (a[param] < b[param] ? -1 : 1));
+    },
   },
 });
 </script>
