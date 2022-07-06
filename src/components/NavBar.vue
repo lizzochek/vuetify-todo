@@ -43,6 +43,11 @@
           </v-avatar>
           <p class="subheading mt-1 text-center" center>Liza</p>
         </v-flex>
+
+        <!-- Popup -->
+        <v-flex class="mt-4 mb-3">
+          <PopUp />
+        </v-flex>
       </v-layout>
       <v-list class="bg-deep-purple">
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
@@ -59,7 +64,10 @@
 </template>
 
 <script>
+import PopUp from './PopUp.vue';
+
 export default {
+  components: { PopUp },
   data() {
     return {
       drawer: false,
