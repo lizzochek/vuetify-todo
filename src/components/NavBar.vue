@@ -3,6 +3,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon color="grey--text" @click="drawer = !drawer"></v-app-bar-nav-icon>
 
+      <!-- Title -->
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">Todo</span>
         <span>List</span>
@@ -10,12 +11,30 @@
 
       <v-spacer></v-spacer>
 
+      <!-- Dropdown menu -->
+
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn text color="grey" v-on="on">
+            <v-icon>expand_more</v-icon>
+            <span text color="grey">Menu</span>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
+            <v-list-item-title>{{ link.text }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <!-- Sign out section -->
       <v-btn text color="grey">
         <span>Sign out</span>
         <v-icon right>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
 
+    <!-- Drawer -->
     <v-navigation-drawer v-model="drawer" app>
       <v-layout column align-center justify-center>
         <v-flex class="mt-5">
