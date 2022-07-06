@@ -38,7 +38,9 @@
             <v-date-picker v-model="due" full-width></v-date-picker>
           </v-menu>
 
-          <v-btn class="success mx-0 mt-3" @click="submitForm">Add project</v-btn>
+          <v-btn class="success mx-0 mt-3" @click="submitForm" :loading="isLoading"
+            >Add project</v-btn
+          >
         </v-form>
       </v-card-text>
     </v-card>
@@ -55,6 +57,7 @@ export default {
       content: '',
       due: '',
       dialog: false,
+      isLoading: false,
       inputRules: [(v) => v.length >= 3 || 'Minimum length is three characters'],
     };
   },
@@ -62,6 +65,8 @@ export default {
   methods: {
     async submitForm() {
       if (this.$refs.form.validate()) {
+        this.isLoading = true;
+
         const project = {
           title: this.title,
           content: this.content,
@@ -71,6 +76,7 @@ export default {
         };
 
         setItem('projects', project);
+        this.isLoading = false;
         this.dialog = false;
       }
     },
