@@ -10,7 +10,7 @@
 
       <!-- Title -->
       <v-toolbar-title class="text-uppercase grey--text">
-        <span class="font-weight-light">Todo</span>
+        <span class="font-weight-light" left>Todo</span>
         <span>List</span>
       </v-toolbar-title>
 

@@ -37,7 +37,6 @@ const getItems = (collectionName, field, comparable) => {
       collectionItems.push(document.data());
     });
   });
-  console.log(collectionItems);
   return collectionItems;
 };
 

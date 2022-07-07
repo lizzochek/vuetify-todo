@@ -15,11 +15,13 @@
             label="Title"
             v-model="title"
             prepend-icon="folder"
+            class="grey lighten-4 px-1"
             :rules="inputRules"
           ></v-text-field>
           <v-textarea
             label="Information"
             v-model="content"
+            class="grey lighten-4 px-1"
             prepend-icon="edit"
             :rules="inputRules"
           ></v-textarea>
@@ -31,7 +33,8 @@
                 prepend-icon="date_range"
                 v-on="on"
                 :value="due"
-                :rules="inputRules"
+                class="grey lighten-4 px-1"
+                :rules="dateRules"
               >
               </v-text-field>
             </template>
@@ -59,6 +62,7 @@ export default {
       dialog: false,
       isLoading: false,
       inputRules: [(v) => v.length >= 3 || 'Minimum length is three characters'],
+      dateRules: [(v) => /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(v) || 'Please enter a valid date'],
     };
   },
 
