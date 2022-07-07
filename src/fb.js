@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+
+// eslint-disable-next-line
+import { doc, setDoc, onSnapshot, collection, query, where } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDbuwzebpAu5-RL0KhYhVMj2-1uk5a2fqo',
@@ -16,21 +18,27 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const setItem = async (collection, params) => {
+const setItem = async (collectionName, params) => {
   const id = new Date().getTime().toString();
 
-  await setDoc(doc(db, collection, id), params);
+  await setDoc(doc(db, collectionName, id), params);
 };
 
-const getItem = async (collection, id) => {
-  const docRef = doc(db, collection, id);
-  const docSnap = await getDoc(docRef);
-
-  if (docSnap.exists()) {
-    console.log('Document data:', docSnap.data());
+const getItems = (collectionName, field, comparable) => {
+  const collectionItems = [];
+  let q;
+  if (field) {
+    q = query(collection(db, collectionName), where(field, '==', comparable));
   } else {
-    console.log('No such document!');
+    q = query(collection(db, collectionName));
   }
+  onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((document) => {
+      collectionItems.push(document.data());
+    });
+  });
+  console.log(collectionItems);
+  return collectionItems;
 };
 
-export { setItem, getItem };
+export { setItem, getItems };

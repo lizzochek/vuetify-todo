@@ -53,51 +53,22 @@
 
 <script>
 import { defineComponent } from 'vue';
+import { getItems } from '@/fb';
 
 export default defineComponent({
   name: 'DashBoard',
   data() {
     return {
-      projects: [
-        {
-          title: 'Design a new website',
-          person: 'Liza',
-          due: '1st Jan 2023',
-          status: 'ongoing',
-          content:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!',
-        },
-        {
-          title: 'Code up the homepage',
-          person: 'Anna',
-          due: '10th Jan 2023',
-          status: 'complete',
-          content:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!',
-        },
-        {
-          title: 'Design video thumbnails',
-          person: 'Chendler',
-          due: '20th Dec 2023',
-          status: 'complete',
-          content:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!',
-        },
-        {
-          title: 'Create a community forum',
-          person: 'John',
-          due: '20th Oct 2020',
-          status: 'overdue',
-          content:
-            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!',
-        },
-      ],
+      projects: [],
     };
   },
   methods: {
     sortByParam(param) {
       this.projects.sort((a, b) => (a[param] < b[param] ? -1 : 1));
     },
+  },
+  created() {
+    this.projects = getItems('projects');
   },
 });
 </script>
